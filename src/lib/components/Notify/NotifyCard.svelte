@@ -1,0 +1,82 @@
+<script>
+export let notification;
+export let opts;
+import Icon from "@iconify/svelte";
+import { createEventDispatcher } from "svelte";
+
+const dispatch = createEventDispatcher();
+
+function remove() {
+    dispatch("remove");
+}
+</script>
+
+<div class="card">
+    <div class="icon">
+        {#if !opts.type || opts.type == "info"}
+            <Icon icon="fluent:info-12-regular" height="24" />
+        {/if}
+        {#if opts.type == "copy"}
+            <Icon icon="mingcute:copy-3-line" height="24" />
+        {/if}
+    </div>
+    <span>
+        {notification}
+    </span>
+    <button class="close" on:click={remove}>
+        <Icon icon="mingcute:close-line" width="20" />
+    </button>
+</div>
+
+<style lang="scss">
+.card {
+    width: 350px;
+    background-color: var(--background-secondary);
+    padding: 0.5rem;
+    padding-inline: 1rem 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.5s ease-in-out;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+    }
+    span {
+        padding: 0.5rem;
+        width: 100%;
+    }
+    .close {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: inherit;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        font-weight: inherit;
+        &:hover {
+            box-shadow: none;
+            background-color: transparent;
+            color: inherit !important;
+        }
+        &:focus {
+            box-shadow: none;
+        }
+        width: 36px;
+        aspect-ratio: 1;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 0.25rem;
+        border-radius: 0;
+        border-left: 1px solid var(--mono-500);
+        &:hover {
+            color: var(--accent-500);
+        }
+    }
+}
+</style>
