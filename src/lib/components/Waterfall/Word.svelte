@@ -5,7 +5,7 @@ const dispatch = createEventDispatcher();
 
 export let data;
 export let content;
-export let value = undefined;
+export let slotted = false;
 let show;
 let popup;
 
@@ -16,10 +16,17 @@ export function closeAll() {
 
 <button
     class="csd-tt__button-unstyled"
+    class:csd-tt__button-nostyle={false}
     on:click={() => {
         show = true;
         dispatch("showing");
-    }}>{value ? value : content}</button>
+    }}>
+    {#if slotted}
+        <slot />
+    {:else}
+        {content}
+    {/if}
+</button>
 {#if show}
     <Popup
         bind:this={popup}
@@ -62,5 +69,8 @@ export function closeAll() {
         // border: 0 !important;
         outline: 0 !important;
     }
+}
+.csd-tt__button-nostyle {
+    background-color: transparent;
 }
 </style>

@@ -28,5 +28,10 @@
         "name": "numbers",
         "title": "Number",
         "tooltip": "Number is often used as a generic or abstract reference to any data type that represents numeric values, which can include integers, floats, doubles, and more. The {{real}} data type, on the other hand, specifically refers to a subset of numbers that includes rational and irrational numbers, representing values along the {{real}} number line, which encompasses all possible numeric values, including whole numbers and fractions."
+    },
+    {
+        "name": "any:spaceName",
+        "title": "any",
+        "tooltip": "Number is often used as a generic or abstract reference to any data type that represents numeric values, which can include integers, floats, doubles, and more. The {{real}} data type, on the other hand, specifically refers to a subset of numbers that includes rational and irrational numbers, representing values along the {{real}} number line, which encompasses all possible numeric values, including whole numbers and fractions."
     }
 ]

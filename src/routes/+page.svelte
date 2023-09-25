@@ -71,6 +71,10 @@ const fruits = [
         <WaterfallSingle content="Label" />
     </span>
 
+    <WaterfallSingle content="any:spaceName" slotted>
+        <span style="font-style:italic">any</span>
+    </WaterfallSingle>
+
     <span>
         <Waterfall content="This a label using boolean operator" />
     </span>

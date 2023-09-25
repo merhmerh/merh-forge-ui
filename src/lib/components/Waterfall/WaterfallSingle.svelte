@@ -3,7 +3,7 @@ import { dictionary } from "$lib/components/Waterfall/Waterfall.store";
 import { tick } from "svelte";
 import Word from "./Word.svelte";
 export let content;
-export let value = undefined;
+export let slotted = false;
 export let data = $dictionary.find((obj) => obj.name.toLowerCase() === content.toLowerCase());
 
 let comp, showing, scrollTop;
@@ -35,7 +35,7 @@ function handleScroll(e) {
     bind:this={comp}
     {data}
     {content}
-    {value}
+    {slotted}
     on:close={() => {
         showing = false;
     }}
@@ -45,7 +45,9 @@ function handleScroll(e) {
     on:showing={() => {
         showing = true;
         scrollTop = window.scrollY;
-    }} />
+    }}>
+    <slot />
+</Word>
 
 <style lang="scss">
 .csd-tt__backdrop {
