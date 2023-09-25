@@ -29,7 +29,6 @@ function handleShowing(e) {
 function close() {
     dispatch("close");
     const nodes = document.querySelectorAll(".csd-tt__popup");
-    console.log(nodes.length);
     if (nodes.length == 1) {
         dispatch("closeAll");
     }
@@ -93,7 +92,7 @@ onMount(async () => {
         </div>
     </button>
     <!-- {id} -->
-    <span class="csd-tt__popup__label">{data.name}</span>
+    <span class="csd-tt__popup__label">{data.title}</span>
     <div class="csd-tt__popup__content">
         {#each tooltip_data as obj}
             {#if obj.type == "string"}{obj.content}&nbsp;

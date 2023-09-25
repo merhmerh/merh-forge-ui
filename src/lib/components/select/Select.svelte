@@ -30,7 +30,6 @@ let open = false,
 
 export let dropdownRelative = false;
 let dropdownDisplay = dropdownRelative ? "relative" : "absolute";
-console.log(dropdownDisplay);
 /**
  * @type {Array<{value: string, label: string}>|Array<string>}
  * @param {Array<{value: string, label: string, match: boolean}>} items
