@@ -6,7 +6,7 @@
 		"build": "vite build && npm run package",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
-		"npmPublish": "pnpm build && npm version patch && npm publish",
+		"pub": "pnpm build && npm publish",
 		"git": "git add . && git commit -m",
 		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",

@@ -5,6 +5,7 @@ const dispatch = createEventDispatcher();
 
 export let data;
 export let content;
+export let value = undefined;
 let show;
 let popup;
 
@@ -18,7 +19,7 @@ export function closeAll() {
     on:click={() => {
         show = true;
         dispatch("showing");
-    }}>{content}</button>
+    }}>{value ? value : content}</button>
 {#if show}
     <Popup
         bind:this={popup}

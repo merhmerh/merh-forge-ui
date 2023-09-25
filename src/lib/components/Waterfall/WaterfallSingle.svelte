@@ -3,26 +3,10 @@ import { dictionary } from "$lib/components/Waterfall/Waterfall.store";
 import { tick } from "svelte";
 import Word from "./Word.svelte";
 export let content;
+export let value = undefined;
 export let data = $dictionary.find((obj) => obj.name.toLowerCase() === content.toLowerCase());
 
 let comp, showing, scrollTop;
-
-async function triggerClose(e) {
-    // if (e.key == "Escape" && showing) {
-    //     // comp.closeAll();
-    //     // showing = false;
-    //     // return;
-    //     const nodes = document.querySelectorAll(".csd-tt__popup");
-    //     const el = Array.from(nodes).pop();
-    //     if (el) {
-    //         comp.triggerClose(el.id);
-    //     }
-    //     await tick();
-    //     if (!document.querySelectorAll(".csd-tt__popup").length) {
-    //         showing = false;
-    //     }
-    // }
-}
 
 function handleScroll(e) {
     if (showing) {
@@ -51,6 +35,7 @@ function handleScroll(e) {
     bind:this={comp}
     {data}
     {content}
+    {value}
     on:close={() => {
         showing = false;
     }}
