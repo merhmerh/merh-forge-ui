@@ -16,7 +16,7 @@ function handleScroll(e) {
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<svelte:window on:keydown={triggerClose} on:scroll={handleScroll} />
+<svelte:window on:scroll={handleScroll} />
 
 {#if showing}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
