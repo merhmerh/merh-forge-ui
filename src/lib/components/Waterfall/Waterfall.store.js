@@ -9,7 +9,8 @@ export function convert(string) {
     const words = string.split(/\s/)
 
     for (const word of words) {
-        const matchingObject = dict.find(obj => obj.name.toLowerCase() === word.toLowerCase());
+        const matchingObject = matchDictionary(dict, word)
+        console.log(matchingObject);
         if (matchingObject) {
             string = string.replace(word, `{{${word}}}`)
         }
@@ -17,7 +18,17 @@ export function convert(string) {
     return string
 }
 
-
+export function matchDictionary(dictionary, string) {
+    return dictionary.find(obj => {
+        if (Array.isArray(obj.name)) {
+            const arr = obj.name.map(x => x.toLowerCase())
+            const exists = arr.includes(string.toLowerCase())
+            return exists
+        } else {
+            return obj.name.toLowerCase() === string.toLowerCase()
+        }
+    })
+}
 
 export function convertStringToArray(inputString) {
     const pattern = /\{\{([^}]+)\}\}/gi;
@@ -26,13 +37,13 @@ export function convertStringToArray(inputString) {
     let lastIndex = 0;
     const dict = get(dictionary)
 
-
     while ((match = pattern.exec(inputString))) {
         if (match.index > lastIndex) {
             result.push({ type: "string", content: inputString.slice(lastIndex, match.index).trim() });
         }
 
-        const data = dict.find(obj => obj.name.toLowerCase() === match[1].toLowerCase())
+        const data = matchDictionary(dict, match[1])
+
         result.push({ type: "data", content: match[1], data: data });
         lastIndex = pattern.lastIndex;
     }

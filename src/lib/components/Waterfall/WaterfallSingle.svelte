@@ -1,10 +1,9 @@
 <script>
-import { dictionary } from "$lib/components/Waterfall/Waterfall.store";
-import { tick } from "svelte";
+import { dictionary, matchDictionary } from "$lib/components/Waterfall/Waterfall.store";
 import Word from "./Word.svelte";
 export let content;
 export let slotted = false;
-export let data = $dictionary.find((obj) => obj.name.toLowerCase() === content.toLowerCase());
+export let data = matchDictionary($dictionary, content);
 
 let comp, showing, scrollTop;
 

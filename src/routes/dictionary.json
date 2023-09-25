@@ -5,7 +5,10 @@
         "tooltip": "A real datatype in computing is a data type that can represent a wide range of numeric values, including both whole numbers (integers) and numbers with decimal fractions.\n\nThis datatype encompasses all rational numbers (those that can be expressed as a fraction), irrational numbers (such as the square root of 2), and scientific real numbers, making it a versatile choice for storing and manipulating various numeric data in computer programs."
     },
     {
-        "name": "boolean",
+        "name": [
+            "boolean",
+            "yes/no"
+        ],
         "title": "Boolean",
         "tooltip": "A boolean is a binary data type that can hold values of either \"true\" or \"false\", serving as a basis for logical operations; in Revit, it is represented as \"Yes\" or \"No\"."
     },
