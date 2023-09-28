@@ -79,10 +79,11 @@ const fruits = [
         <Waterfall content="This a label using boolean operator" />
     </span>
 
-    <Modal bind:this={modal}>
+    <Modal bind:this={modal} let:closeModal>
         <h1 style="margin:0;">Modal</h1>
         <p>Content</p>
         <Select searchable items={fruits}></Select>
+        <button on:click={closeModal}>Close</button>
     </Modal>
 
     <div class="select-container">
@@ -95,6 +96,7 @@ const fruits = [
         }}>
         Click to show Modal
     </button>
+
     <input
         type="text"
         on:keydown={(e) => {

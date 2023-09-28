@@ -3,7 +3,7 @@ import Icon from "@iconify/svelte";
 import { createEventDispatcher, onDestroy, onMount } from "svelte";
 let modal;
 let ready;
-export let show = false;
+export let showModal = false;
 export let closeButton = true;
 export let closePosition = "modal";
 export let modalPosition = "center";
@@ -69,13 +69,25 @@ function closeFromChild() {
     close();
 }
 
+function closeModal() {
+    close();
+}
+
+export function show() {
+    open();
+}
+
+export function hide() {
+    close();
+}
+
 export function open() {
-    show = true;
+    showModal = true;
     document.body.style.overflowY = "hidden";
 }
 
 export function close() {
-    show = false;
+    showModal = false;
     document.body.style.overflowY = "auto";
 
     dispatch("close");
@@ -83,7 +95,7 @@ export function close() {
 </script>
 
 <svelte:window on:keydown={handle_keydown} />
-{#if show}
+{#if showModal}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div aria-modal="true" class="modal_background" on:click|self={clickOutside} bind:this={modal}>
@@ -103,7 +115,7 @@ export function close() {
                 {/if}
             {/if}
             <div class:slot={modalStyle}>
-                <slot {closeFromChild} />
+                <slot {closeFromChild} {closeModal} />
             </div>
         </div>
     </div>
