@@ -1,17 +1,18 @@
 <script>
-import { createEventDispatcher } from "svelte";
+import { createEventDispatcher, tick } from "svelte";
 import { fade } from "svelte/transition";
 
 export let clickedValue = "";
 export let value;
 export let position = "center";
+export let fixed = false;
 export let display = "inline-block";
 export let width = "100%";
 let tooltipValue = value;
 
 const dispatch = createEventDispatcher();
 
-let showToolTip, tooltipTopOffset, slot, overlay, container;
+let showToolTip, tooltipTopLeft, tooltipTopOffset, slot, overlay, container;
 
 $: showToolTip,
     (() => {
@@ -27,6 +28,16 @@ $: showToolTip,
             }
         }
     })();
+
+function setPosition() {
+    if (position == "top") {
+        const tooltip_height = overlay.getBoundingClientRect().height;
+        const container_dim = container.getBoundingClientRect();
+        tooltipTopOffset = container_dim.y - tooltip_height + "px";
+        console.log(container_dim.x);
+        tooltipTopLeft = container_dim.x + container_dim.width / 2 + "px";
+    }
+}
 
 function onClick() {
     if (clickedValue) {
@@ -48,8 +59,12 @@ function onClick() {
     on:mouseleave={() => {
         showToolTip = false;
     }}
-    on:mouseenter={() => {
+    on:mouseenter={async () => {
         showToolTip = true;
+        await tick();
+        if (fixed) {
+            setPosition();
+        }
     }}>
     <div class="slot" bind:this={slot}>
         <slot />
@@ -58,8 +73,10 @@ function onClick() {
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
             class="tooltip__popup"
+            class:fixed
             class:arrow={position !== "center"}
-            style="--tooltip__top: {tooltipTopOffset}"
+            style="--tooltip__left: {tooltipTopLeft}; --tooltip__top: {tooltipTopOffset};
+                --tooltip__width: {width}"
             class:top={position == "top"}
             class:bottom={position == "bottom"}
             transition:fade={{ duration: 150 }}
@@ -75,7 +92,7 @@ function onClick() {
     display: var(--tooltip__container-display);
     position: relative;
     height: fit-content;
-    width: var(--tooltip__container-width);
+    width: 100%;
 }
 
 .tooltip__popup {
@@ -92,7 +109,6 @@ function onClick() {
     font-size: 0.875rem;
     border: 1px solid var(--mono-300);
     background-color: var(--mono-200);
-
     span {
         display: flex;
     }
@@ -140,6 +156,15 @@ function onClick() {
         }
         .overlay {
             top: -7px;
+        }
+    }
+    &.fixed {
+        position: fixed;
+        top: var(--tooltip__top);
+        left: var(--tooltip__left);
+        width: var(--tooltip__width);
+        span {
+            white-space: normal;
         }
     }
 }

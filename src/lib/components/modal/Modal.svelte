@@ -1,6 +1,6 @@
 <script>
 import Icon from "@iconify/svelte";
-import { createEventDispatcher, onDestroy, onMount } from "svelte";
+import { createEventDispatcher, onMount } from "svelte";
 let modal;
 let ready;
 export let showModal = false;
