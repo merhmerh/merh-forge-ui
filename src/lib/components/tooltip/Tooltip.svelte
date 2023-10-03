@@ -34,7 +34,6 @@ function setPosition() {
         const tooltip_height = overlay.getBoundingClientRect().height;
         const container_dim = container.getBoundingClientRect();
         tooltipTopOffset = container_dim.y - tooltip_height + "px";
-        console.log(container_dim.x);
         tooltipTopLeft = container_dim.x + container_dim.width / 2 + "px";
     }
 }
@@ -92,7 +91,7 @@ function onClick() {
     display: var(--tooltip__container-display);
     position: relative;
     height: fit-content;
-    width: 100%;
+    width: var(--tooltip__width);
 }
 
 .tooltip__popup {
