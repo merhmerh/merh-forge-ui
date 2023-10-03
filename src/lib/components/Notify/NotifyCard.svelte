@@ -11,7 +11,7 @@ function remove() {
 }
 </script>
 
-<div class="card">
+<div class="notify__card">
     <div class="icon">
         {#if !opts.type || opts.type == "info"}
             <Icon icon="fluent:info-12-regular" height="24" />
@@ -29,7 +29,7 @@ function remove() {
 </div>
 
 <style lang="scss">
-.card {
+.notify__card {
     width: 350px;
     background-color: var(--background-secondary);
     padding: 0.5rem;

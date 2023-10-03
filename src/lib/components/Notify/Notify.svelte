@@ -4,7 +4,7 @@ import { notify } from "./notify.store";
 import NotifyCard from "./NotifyCard.svelte";
 </script>
 
-<div class="container">
+<div class="notify__container">
     {#each $notify as card (card.id)}
         <div transition:fly={{ y: -64, duration: 300 }}>
             <NotifyCard
@@ -18,7 +18,7 @@ import NotifyCard from "./NotifyCard.svelte";
 </div>
 
 <style lang="scss">
-.container {
+.notify__container {
     position: fixed;
     top: 2rem;
     left: 50%;
