@@ -11,6 +11,7 @@ import { dictionary } from "$lib/components/Waterfall/Waterfall.store";
 import dict from "./dictionary.json";
 import WaterfallSingle from "$lib/components/Waterfall/WaterfallSingle.svelte";
 import Waterfall from "$lib/components/Waterfall/Waterfall.svelte";
+import Switch from "$lib/components/Switch/Switch.svelte";
 
 dictionary.set(dict);
 
@@ -44,13 +45,18 @@ const fruits = [
     "Yuzu",
     "Zucchini",
 ];
+let ch = false;
 </script>
 
 <Notify />
 
 <main>
     <h1>FORGE UI</h1>
-
+    <Switch
+        bind:isChecked={ch}
+        on:change={(e) => {
+            console.log(e.detail);
+        }}>Toggle</Switch>
     <Tooltip
         position="top"
         value="Copy"
