@@ -10,7 +10,7 @@ export function convert(string) {
 
     for (const word of words) {
         const matchingObject = matchDictionary(dict, word)
-        console.log(matchingObject);
+        // console.log(matchingObject);
         if (matchingObject) {
             string = string.replace(word, `{{${word}}}`)
         }

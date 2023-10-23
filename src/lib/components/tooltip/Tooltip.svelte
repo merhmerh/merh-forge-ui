@@ -66,7 +66,7 @@ function onClick() {
         }
     }}>
     <div class="slot" bind:this={slot}>
-        <slot />
+        <slot {onClick} />
     </div>
     {#if showToolTip}
         <!-- svelte-ignore a11y-click-events-have-key-events -->

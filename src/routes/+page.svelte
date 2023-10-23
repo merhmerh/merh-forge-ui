@@ -5,6 +5,7 @@ import Popover from "$lib/components/popover/Popover.svelte";
 import Modal from "$lib/components/modal/Modal.svelte";
 import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
 import Select, { initItems } from "$lib/components/select/Select.svelte";
+import { beta } from "./main.store";
 import Notify from "$lib/components/Notify/Notify.svelte";
 import { notify } from "$lib/components/Notify/notify.store.js";
 import { dictionary } from "$lib/components/Waterfall/Waterfall.store";
@@ -15,6 +16,7 @@ import Switch from "$lib/components/Switch/Switch.svelte";
 
 dictionary.set(dict);
 
+console.log($beta);
 let modal;
 
 const fruits = [
@@ -53,7 +55,7 @@ let ch = false;
 <main>
     <h1>FORGE UI</h1>
     <Switch
-        bind:isChecked={ch}
+        bind:isChecked={$beta}
         on:change={(e) => {
             console.log(e.detail);
         }}>Toggle</Switch>
@@ -61,6 +63,7 @@ let ch = false;
         position="top"
         value="Copy"
         clickedValue="Copied"
+        let:onClick
         on:click={(e) => {
             console.log("i click tooltip!", e.detail.slot);
             const slot = e.detail.slot;
@@ -70,7 +73,7 @@ let ch = false;
             selection.removeAllRanges();
             selection.addRange(range);
         }}>
-        <code class="button">Copy this text</code>
+        <code class="button" on:click={onClick}>Copy this text</code>
     </Tooltip>
 
     <span>
