@@ -5,16 +5,18 @@ import { createEventDispatcher } from "svelte";
 export let height = "32";
 export let filled = false;
 export let checked = false;
+export let disabled = false;
 
 const dispatch = createEventDispatcher();
 
 function toggleCheck() {
+    if (disabled) return;
     checked = !checked;
     dispatch("check", checked);
 }
 </script>
 
-<button class="container" on:click={toggleCheck} style="--height:{height}px">
+<button class="container" class:disabled on:click={toggleCheck} style="--height:{height}px">
     <div class="checkbox">
         {#if checked}
             {#if filled}
@@ -41,6 +43,9 @@ button.container {
     background-color: transparent;
     border: 0;
     padding: 0;
+    &.disabled {
+        filter: opacity(0.5);
+    }
     &:hover {
         background-color: none;
         box-shadow: none;

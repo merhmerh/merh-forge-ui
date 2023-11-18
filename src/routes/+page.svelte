@@ -57,7 +57,7 @@ let ch = false;
     <h1>FORGE UI</h1>
 
     <div style="display:flex;align-items:center;gap:.5rem;">
-        <Checkbox filled={true}><span>Checkbox</span></Checkbox>
+        <Checkbox disabled filled={true}><span>Checkbox</span></Checkbox>
     </div>
     <Switch
         bind:isChecked={$beta}
