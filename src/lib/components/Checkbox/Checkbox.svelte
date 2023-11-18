@@ -1,22 +1,22 @@
 <script>
-export let isChecked = false;
 import Icon from "@iconify/svelte";
 import { createEventDispatcher } from "svelte";
 
 export let height = "32";
 export let filled = false;
+export let checked = false;
 
 const dispatch = createEventDispatcher();
 
 function toggleCheck() {
-    isChecked = !isChecked;
-    dispatch("check", isChecked);
+    checked = !checked;
+    dispatch("check", checked);
 }
 </script>
 
 <button class="container" on:click={toggleCheck} style="--height:{height}px">
     <div class="checkbox">
-        {#if isChecked}
+        {#if checked}
             {#if filled}
                 <Icon icon="fluent:checkbox-checked-24-filled" {height} />
             {:else}
