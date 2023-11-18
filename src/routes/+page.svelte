@@ -13,6 +13,7 @@ import dict from "./dictionary.json";
 import WaterfallSingle from "$lib/components/Waterfall/WaterfallSingle.svelte";
 import Waterfall from "$lib/components/Waterfall/Waterfall.svelte";
 import Switch from "$lib/components/Switch/Switch.svelte";
+import Checkbox from "$lib/components/Checkbox/Checkbox.svelte";
 
 dictionary.set(dict);
 
@@ -54,6 +55,10 @@ let ch = false;
 
 <main>
     <h1>FORGE UI</h1>
+
+    <div style="display:flex;align-items:center;gap:.5rem;">
+        <Checkbox filled={true}><span>Checkbox</span></Checkbox>
+    </div>
     <Switch
         bind:isChecked={$beta}
         on:change={(e) => {
@@ -63,7 +68,7 @@ let ch = false;
         position="top"
         value="Copy"
         clickedValue="Copied"
-        let:onClick
+        let:triggerClick
         on:click={(e) => {
             console.log("i click tooltip!", e.detail.slot);
             const slot = e.detail.slot;
@@ -73,7 +78,7 @@ let ch = false;
             selection.removeAllRanges();
             selection.addRange(range);
         }}>
-        <code class="button" on:click={onClick}>Copy this text</code>
+        <code class="button" on:click={triggerClick}>Copy this text</code>
     </Tooltip>
 
     <span>
