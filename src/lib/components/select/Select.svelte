@@ -30,6 +30,7 @@ let open = false,
 
 export let dropdownRelative = false;
 let dropdownDisplay = dropdownRelative ? "relative" : "absolute";
+
 /**
  * @type {Array<{value: string, label: string}>|Array<string>}
  * @param {Array<{value: string, label: string, match: boolean}>} items
@@ -176,6 +177,7 @@ async function toggleDropdown() {
         preselected = false;
         input.value = "";
         placeholder = selected ? selected.label : placeholder;
+
         foundSearch = true;
     }
 
@@ -303,7 +305,7 @@ function fadeSlide(node, { delay = 0, duration = 300 }) {
                     }}
                     spellcheck="false"
                     autocomplete="false"
-                    placeholder={selected ? selected.label : placeholder || "Search..."} />
+                    placeholder={placeholder !== false ? (selected ? selected.label : placeholder || "Search...") : ""} />
             </div>
         {:else}
             <div class="label">

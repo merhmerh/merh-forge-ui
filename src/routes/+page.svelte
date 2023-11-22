@@ -56,6 +56,8 @@ let ch = false;
 <main>
     <h1>FORGE UI</h1>
 
+    <Select searchable placeholder={false} items={fruits}></Select>
+
     <div style="display:flex;align-items:center;gap:.5rem;">
         <Checkbox disabled filled={true}><span>Checkbox</span></Checkbox>
     </div>
