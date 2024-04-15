@@ -1,6 +1,6 @@
 <script>
 import Icon from "@iconify/svelte";
-import { createEventDispatcher, onMount } from "svelte";
+import { createEventDispatcher, onMount, tick } from "svelte";
 let modal;
 let ready;
 export let showModal = false;
@@ -17,13 +17,8 @@ const dispatch = createEventDispatcher();
 onMount(() => {
     if (!modal) return;
     document.body.style.overflowY = "hidden";
-    const nodes = modal.querySelectorAll("*");
-    const tabbable = Array.from(nodes).filter((n) => n.tabIndex >= 0);
-    for (const el of tabbable) {
-        if (el.classList.contains("modal_close")) continue;
-        el.focus();
-        break;
-    }
+
+    focusFirstElement();
     ready = true;
 
     return () => {
@@ -36,6 +31,18 @@ function clickOutside() {
         return;
     }
     close();
+}
+
+async function focusFirstElement() {
+    await tick();
+    if (!modal) return;
+    const nodes = modal.querySelectorAll("*");
+    const tabbable = Array.from(nodes).filter((n) => n.tabIndex >= 0);
+    for (const el of tabbable) {
+        if (el.classList.contains("modal_close")) continue;
+        el.focus();
+        break;
+    }
 }
 
 function handle_keydown(e) {
@@ -84,6 +91,7 @@ export function hide() {
 export function open() {
     showModal = true;
     document.body.style.overflowY = "hidden";
+    focusFirstElement();
 }
 
 export function close() {
@@ -99,14 +107,10 @@ export function close() {
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div aria-modal="true" class="modal_background" on:click|self={clickOutside} bind:this={modal}>
-        {#if closeButton}
-            {#if closePosition == "background"}
-                <button class="modal_close topright" on:click={close}>
-                    <Icon icon="material-symbols:close" width="42" inline={true} />
-                </button>
-            {/if}
-        {/if}
         <div class="modal" modal_position={modalPosition} class:noStyle={!modalStyle} role="dialog" aria-modal="true">
+            <div class:slot={modalStyle}>
+                <slot {closeFromChild} {closeModal} />
+            </div>
             {#if closeButton}
                 {#if closePosition == "modal"}
                     <button class="modal_close" on:click={close}>
@@ -114,10 +118,14 @@ export function close() {
                     </button>
                 {/if}
             {/if}
-            <div class:slot={modalStyle}>
-                <slot {closeFromChild} {closeModal} />
-            </div>
         </div>
+        {#if closeButton}
+            {#if closePosition == "background"}
+                <button class="modal_close topright" on:click={close}>
+                    <Icon icon="material-symbols:close" width="42" inline={true} />
+                </button>
+            {/if}
+        {/if}
     </div>
 {/if}
 
