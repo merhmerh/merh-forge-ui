@@ -14,6 +14,7 @@ import WaterfallSingle from "$lib/components/Waterfall/WaterfallSingle.svelte";
 import Waterfall from "$lib/components/Waterfall/Waterfall.svelte";
 import Switch from "$lib/components/Switch/Switch.svelte";
 import Checkbox from "$lib/components/Checkbox/Checkbox.svelte";
+import FormControls from "$lib/components/FormControls/FormControls.svelte";
 
 dictionary.set(dict);
 
@@ -82,6 +83,8 @@ let ch = false;
         }}>
         <code class="button" on:click={triggerClick}>Copy this text</code>
     </Tooltip>
+
+    <FormControls reverse={true} />
 
     <span>
         <WaterfallSingle content="Label" />
