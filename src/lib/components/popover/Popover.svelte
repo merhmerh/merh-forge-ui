@@ -106,7 +106,7 @@ function closePopover() {
     background-color: transparent;
     // background-color: beige;
     // opacity: 0.05;
-    width: 100vw;
+    width: min(100%, 100vw);
     height: 100vh;
     position: fixed;
     top: 0;

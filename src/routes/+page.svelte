@@ -49,10 +49,26 @@ const fruits = [
     "Yuzu",
     "Zucchini",
 ];
-let ch = false;
 </script>
 
 <Notify />
+
+<header>
+    <div class="fixed">
+        <Popover position="auto">
+            <span slot="button">
+                <button class="alt">Click Me</button>
+            </span>
+
+            <span slot="popup" class="mypopup">
+                <a href="/">item 1</a>
+                <a href="/">item 2</a>
+                <a href="/">item 3</a>
+                <a href="/">item 4</a>
+            </span>
+        </Popover>
+    </div>
+</header>
 
 <main>
     <h1>FORGE UI</h1>
@@ -148,6 +164,12 @@ let ch = false;
 <style lang="scss">
 .select-container {
     width: 400px;
+}
+
+header {
+    display: flex;
+    height: 60px;
+    justify-content: flex-end;
 }
 
 main {
