@@ -19,7 +19,6 @@ export function initItems(arr) {
 import { createEventDispatcher, onMount, tick } from "svelte";
 import { quadOut } from "svelte/easing";
 import Icon from "@iconify/svelte";
-import { timeout } from "$lib/helper.js";
 
 let open = false,
     foundSearch = true,
@@ -289,7 +288,8 @@ async function handleArrowKeys(e) {
     }
 
     if (e.key == "ArrowDown" || e.key == "ArrowUp") {
-        const currentIndex = arrItems.findIndex((x) => x.match == true);
+        const currentIndex = arrItems.findIndex((x) => x.value == selected.value);
+        console.log(currentIndex);
         if (e.key == "ArrowDown") {
             arrowIndex++;
             if (arrowIndex > arrItems.length - 1) {

@@ -74,7 +74,7 @@ const fruits = [
     <h1>FORGE UI</h1>
 
     <input type="text" placeholder="text" />
-    <Select searchable placeholder={false} items={fruits} defaultValue="Apple"></Select>
+    <Select searchable placeholder={false} items={fruits} defaultValue="Cherry"></Select>
     <input type="text" placeholder="text" />
 
     <div style="display:flex;align-items:center;gap:.5rem;">
