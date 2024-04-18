@@ -274,11 +274,14 @@ function fadeSlide(node, { delay = 0, duration = 300 }) {
     };
 }
 
-let arrowIndex = 0;
+let arrowIndex = 0,
+    preselected_index;
 $: open,
     (() => {
-        arrowIndex = 0;
-        preselected = false;
+        if (open) {
+            preselected_index = null;
+            preselected = false;
+        }
     })();
 
 async function handleArrowKeys(e) {
@@ -289,20 +292,23 @@ async function handleArrowKeys(e) {
 
     if (e.key == "ArrowDown" || e.key == "ArrowUp") {
         const currentIndex = arrItems.findIndex((x) => x.value == selected.value);
-        console.log(currentIndex);
+        if (preselected_index == null) {
+            preselected_index = currentIndex;
+        }
+
         if (e.key == "ArrowDown") {
-            arrowIndex++;
-            if (arrowIndex > arrItems.length - 1) {
-                arrowIndex = 0;
+            preselected_index++;
+            if (preselected_index > arrItems.length - 1) {
+                preselected_index = 0;
             }
         } else if (e.key == "ArrowUp") {
-            arrowIndex--;
-            if (arrowIndex < 0) {
-                arrowIndex = arrItems.length - 1;
+            preselected_index--;
+            if (preselected_index < 0) {
+                preselected_index = arrItems.length - 1;
             }
         }
-        let index = currentIndex + arrowIndex;
-        preselected = arrItems[index];
+
+        preselected = arrItems[preselected_index];
 
         await tick();
         const preselected_element = dropdown.querySelector(".preselected");
@@ -505,11 +511,11 @@ async function handleArrowKeys(e) {
                 display: none;
             }
 
-            &.selected {
-                background-color: color-mix(in srgb, var(--accent) 75%, transparent);
-            }
             &.preselected {
                 background-color: color-mix(in srgb, var(--accent) 25%, transparent);
+            }
+            &.selected {
+                background-color: color-mix(in srgb, var(--accent) 75%, transparent);
             }
             &.item__border {
                 border-bottom: 1px solid var(--mono-100);
