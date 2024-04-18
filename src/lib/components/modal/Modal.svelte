@@ -11,7 +11,7 @@ export let escape = true;
 export let exitOutsideClick = true;
 export let exitWithEscapeKey = true;
 export let modalStyle = true;
-
+let defaultScrollbarGutter;
 const dispatch = createEventDispatcher();
 
 onMount(() => {
@@ -21,8 +21,11 @@ onMount(() => {
     focusFirstElement();
     ready = true;
 
+    defaultScrollbarGutter = window.getComputedStyle(document.body).scrollbarGutter;
+
     return () => {
         document.body.style.overflowY = "auto";
+        document.body.style.scrollbarGutter = defaultScrollbarGutter;
     };
 });
 
@@ -91,12 +94,15 @@ export function hide() {
 export function open() {
     showModal = true;
     document.body.style.overflowY = "hidden";
+    document.body.style.scrollbarGutter = "none";
+
     focusFirstElement();
 }
 
 export function close() {
     showModal = false;
     document.body.style.overflowY = "auto";
+    document.body.style.scrollbarGutter = defaultScrollbarGutter;
 
     dispatch("close");
 }
