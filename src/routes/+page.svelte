@@ -73,7 +73,9 @@ const fruits = [
 <main>
     <h1>FORGE UI</h1>
 
-    <Select searchable placeholder={false} items={fruits}></Select>
+    <input type="text" placeholder="text" />
+    <Select searchable placeholder={false} items={fruits} defaultValue="Apple"></Select>
+    <input type="text" placeholder="text" />
 
     <div style="display:flex;align-items:center;gap:.5rem;">
         <Checkbox disabled filled={true}><span>Checkbox</span></Checkbox>

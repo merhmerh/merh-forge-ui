@@ -19,6 +19,7 @@ export function initItems(arr) {
 import { createEventDispatcher, onMount, tick } from "svelte";
 import { quadOut } from "svelte/easing";
 import Icon from "@iconify/svelte";
+import { timeout } from "$lib/helper.js";
 
 let open = false,
     foundSearch = true,
@@ -168,7 +169,10 @@ export function change(item) {
     dispatch("change", selected);
 }
 
-async function toggleDropdown() {
+async function toggleDropdown(e) {
+    if (e.target.closest("input")) {
+        return;
+    }
     open = !open;
     if (!open) {
         return closeDropdown();
@@ -270,6 +274,63 @@ function fadeSlide(node, { delay = 0, duration = 300 }) {
         },
     };
 }
+
+let arrowIndex = 0;
+$: open,
+    (() => {
+        arrowIndex = 0;
+        preselected = false;
+    })();
+
+async function handleArrowKeys(e) {
+    if (e.key == "Tab") {
+        open = false;
+        return;
+    }
+
+    if (e.key == "ArrowDown" || e.key == "ArrowUp") {
+        const currentIndex = arrItems.findIndex((x) => x.match == true);
+        if (e.key == "ArrowDown") {
+            arrowIndex++;
+            if (arrowIndex > arrItems.length - 1) {
+                arrowIndex = 0;
+            }
+        } else if (e.key == "ArrowUp") {
+            arrowIndex--;
+            if (arrowIndex < 0) {
+                arrowIndex = arrItems.length - 1;
+            }
+        }
+        let index = currentIndex + arrowIndex;
+        preselected = arrItems[index];
+
+        await tick();
+        const preselected_element = dropdown.querySelector(".preselected");
+        const row = dropdown.querySelector(".item");
+        const offset = row.getBoundingClientRect().height * 2;
+        dropdown.querySelector(".items_container").scrollTo(0, preselected_element.offsetTop - offset);
+
+        return;
+    }
+
+    if (preselected && e.key == "Enter") {
+        selected = preselected;
+        change(preselected);
+        input.blur();
+        closeDropdown();
+        return;
+    }
+
+    open = true;
+    const item = arrItems.filter((x) => x.match == true)[0];
+    preselected = item;
+    if (e.key == "Enter" && foundSearch && item) {
+        selected = item;
+        change(item);
+        input.blur();
+        closeDropdown();
+    }
+}
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -292,17 +353,10 @@ function fadeSlide(node, { delay = 0, duration = 300 }) {
                     on:input={() => {
                         filter(input.value);
                     }}
-                    on:keydown={(e) => {
+                    on:focus={async () => {
                         open = true;
-                        const item = arrItems.filter((x) => x.match == true)[0];
-                        preselected = item;
-                        if (e.key == "Enter" && foundSearch && item) {
-                            selected = item;
-                            change(item);
-                            input.blur();
-                            closeDropdown();
-                        }
                     }}
+                    on:keydown={handleArrowKeys}
                     spellcheck="false"
                     autocomplete="false"
                     placeholder={placeholder !== false ? (selected ? selected.label : placeholder || "Search...") : ""} />
