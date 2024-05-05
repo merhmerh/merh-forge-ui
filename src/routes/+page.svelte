@@ -73,6 +73,16 @@ const fruits = [
 <main>
     <h1>FORGE UI</h1>
 
+    <button
+        on:click={() => {
+            notify.add("hello");
+        }}>Notify</button>
+    <button
+        on:click={() => {
+            notify.alert(
+                ".my-element:not(:defined) applies styles when the variable is not defined or empty..my-element:not(:defined) applies styles when the variable is not defined or empty.",
+            );
+        }}>Alert</button>
     <input type="text" placeholder="text" />
     <Select searchable placeholder={false} items={fruits} defaultValue="Cherry"></Select>
     <input type="text" placeholder="text" />

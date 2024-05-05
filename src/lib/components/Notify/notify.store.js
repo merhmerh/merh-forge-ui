@@ -1,12 +1,11 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
-// The notifyStore will be a writable store that holds an array of notifications
-export const notifyStore = writable([]);
+export const notify = createNotify();
 
-function createCount() {
+function createNotify() {
     const { subscribe, update } = writable([]);
 
-    function add(msg, opts = {}) {
+    function add(msg, opts = { type: "info" }) {
         const notification = {
             id: generateID(),
             message: msg,
@@ -21,7 +20,28 @@ function createCount() {
             remove(notification.id);
         }, duration);
 
-        console.log(notification);
+        return notification.id;
+    }
+
+    function alert(msg, opts = { type: "alert", duration: false }) {
+        const notification = {
+            id: generateID(),
+            message: msg,
+            options: opts,
+        };
+
+        update((notifications) => [...notifications, notification]);
+
+        // Automatically remove the notification after a specified duration (default: 5000ms)
+        if (opts.duration == false) {
+            return notification.id;
+        }
+        const duration = opts.duration || 5000;
+
+        setTimeout(() => {
+            remove(notification.id);
+        }, duration);
+
         return notification.id;
     }
 
@@ -29,7 +49,7 @@ function createCount() {
         update((notifications) => notifications.filter((notification) => notification.id !== id));
     }
 
-    return { subscribe, add, remove };
+    return { subscribe, add, alert, remove };
 }
 
 function generateID(length) {
@@ -46,5 +66,3 @@ function generateID(length) {
 
     return id;
 }
-
-export const notify = createCount();

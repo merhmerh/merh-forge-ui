@@ -8,6 +8,7 @@ import NotifyCard from "./NotifyCard.svelte";
     {#each $notify as card (card.id)}
         <div transition:fly={{ y: -64, duration: 300 }}>
             <NotifyCard
+                type={card.options.type}
                 notification={card.message}
                 opts={card.options}
                 on:remove={() => {

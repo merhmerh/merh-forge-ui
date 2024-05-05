@@ -4,6 +4,8 @@ export let opts;
 import Icon from "@iconify/svelte";
 import { createEventDispatcher } from "svelte";
 
+export let type;
+
 const dispatch = createEventDispatcher();
 
 function remove() {
@@ -11,10 +13,13 @@ function remove() {
 }
 </script>
 
-<div class="notify__card">
+<div class="notify__card" class:info={type == "info"} class:alert={type == "alert"}>
     <div class="icon">
         {#if !opts.type || opts.type == "info"}
             <Icon icon="fluent:info-12-regular" height="24" />
+        {/if}
+        {#if opts.type == "alert"}
+            <Icon icon="mingcute:alert-line" height="24" />
         {/if}
         {#if opts.type == "copy"}
             <Icon icon="mingcute:copy-3-line" height="24" />
@@ -39,6 +44,14 @@ function remove() {
     opacity: 1;
     display: flex;
     align-items: center;
+    --text-color: var(--main);
+
+    &.alert {
+        --background-color: var(--red, #ff5b5b);
+        --text-color: var(--main-alt, #fff);
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
     .icon {
         display: flex;
         align-items: center;
@@ -48,6 +61,7 @@ function remove() {
     span {
         padding: 0.5rem;
         width: 100%;
+        border-right: 1px solid var(--text-color);
     }
     .close {
         background-color: transparent;
@@ -73,7 +87,6 @@ function remove() {
         justify-content: center;
         padding-left: 0.25rem;
         border-radius: 0;
-        border-left: 1px solid var(--mono-500);
         &:hover {
             color: var(--accent-500);
         }
