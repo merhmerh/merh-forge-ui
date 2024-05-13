@@ -13,27 +13,58 @@ async function onShowPopup() {
     await tick();
     scrollTop = window.scrollY;
 
-    if (position == "auto" && popup) {
+    if (popup) {
         const windowHeight = window.innerHeight;
         const windowWidth = window.innerWidth;
 
         const { top: button_top, left: button_left, right: button_right, width: button_width, height: button_height } = button.getBoundingClientRect();
-
         let popup_dim = popup.getBoundingClientRect();
 
-        popup.style.top = button_top + button_height + "px";
-        popup.style.left = button_left - popup_dim.width / 2 + button_width / 2 + "px";
+        if (position == "auto") {
+            popup.style.top = button_top + button_height + "px";
+            popup.style.left = button_left - popup_dim.width / 2 + button_width / 2 + "px";
 
-        popup_dim = popup.getBoundingClientRect();
+            popup_dim = popup.getBoundingClientRect();
 
-        if (popup_dim.left + popup_dim.width > windowWidth - 32) {
+            if (popup_dim.left + popup_dim.width > windowWidth - 32) {
+                popup.style.left = button_right - popup_dim.width + "px";
+            }
+            if (popup_dim.left < 0) {
+                popup.style.left = button_left + "px";
+            }
+            if (popup_dim.bottom > windowHeight) {
+                popup.style.top = button_top - popup_dim.height + "px";
+            }
+        }
+
+        if (position == "bottom-right") {
+            popup.style.top = button_top + button_height + "px";
             popup.style.left = button_right - popup_dim.width + "px";
         }
-        if (popup_dim.left < 0) {
+
+        if (position == "bottom-left") {
+            popup.style.top = button_top + button_height + "px";
             popup.style.left = button_left + "px";
         }
-        if (popup_dim.bottom > windowHeight) {
+
+        if (position == "bottom-center") {
+            popup.style.top = button_top + button_height + "px";
+            popup.style.left = button_left - popup_dim.width / 2 + button_width / 2 + "px";
+        }
+
+        if (position == "top-right") {
             popup.style.top = button_top - popup_dim.height + "px";
+            popup.style.left = button_right - popup_dim.width + "px";
+        }
+
+        if (position == "top-left") {
+            popup.style.top = button_top - popup_dim.height + "px";
+            popup.style.left = button_left + "px";
+        }
+
+        if (position == "top-center") {
+            popup.style.top = button_top - popup_dim.height + "px";
+            popup.style.left = button_left - popup_dim.width / 2 + button_width / 2 + "px";
         }
     }
 
@@ -123,31 +154,5 @@ function closePopover() {
     left: 0;
     top: 0;
     padding: 0 !important;
-    &.bottom-left {
-        top: calc(100% + 8px);
-        left: 0;
-    }
-    &.bottom-right {
-        right: 0;
-        top: calc(100% + 8px);
-    }
-    &.bottom-center {
-        left: 50%;
-        transform: translateX(-50%);
-        top: calc(100% + 8px);
-    }
-    &.top-center {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: calc(100% + 8px);
-    }
-    &.top-left {
-        left: 0%;
-        bottom: calc(100% + 8px);
-    }
-    &.top-right {
-        right: 0%;
-        bottom: calc(100% + 8px);
-    }
 }
 </style>

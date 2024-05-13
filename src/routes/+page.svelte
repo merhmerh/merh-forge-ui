@@ -153,12 +153,8 @@ const fruits = [
             }
         }} />
 
-    <div style="height:400px; width:100%; background-color:pink"></div>
-    <div style="height:400px; width:100%; background-color:pink"></div>
-    <div style="height:400px; width:100%; background-color:pink"></div>
-
     <div class="fixed">
-        <Popover position="auto">
+        <Popover position="bottom-right">
             <span slot="button">
                 <button class="alt">Click Me</button>
             </span>
