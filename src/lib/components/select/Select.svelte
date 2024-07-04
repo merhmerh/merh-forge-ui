@@ -260,6 +260,11 @@ export function reset() {
     selected = null;
 }
 
+export function set() {
+    const item = arrItems.find((x) => x.value == value);
+    change(item);
+}
+
 function fadeSlide(node, { delay = 0, duration = 300 }) {
     return {
         delay,
@@ -274,8 +279,7 @@ function fadeSlide(node, { delay = 0, duration = 300 }) {
     };
 }
 
-let arrowIndex = 0,
-    preselected_index;
+let preselected_index;
 $: open,
     (() => {
         if (open) {

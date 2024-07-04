@@ -195,7 +195,9 @@ button {
     background-color: var(--background-primary);
     border-radius: 1rem;
     &.noStyle {
-        padding: 1rem;
+        padding: 0rem;
+        border-radius: 0;
+        background-color: transparent;
     }
     &[modal_position="top"] {
         top: 5rem;
