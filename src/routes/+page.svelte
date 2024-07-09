@@ -20,7 +20,7 @@ dictionary.set(dict);
 
 console.log($beta);
 let modal;
-
+let nested_modal;
 const fruits = [
     "Apple",
     "Banana",
@@ -95,6 +95,7 @@ const fruits = [
         on:change={(e) => {
             console.log(e.detail);
         }}>Toggle</Switch>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <Tooltip
         position="top"
         value="Copy"
@@ -109,6 +110,7 @@ const fruits = [
             selection.removeAllRanges();
             selection.addRange(range);
         }}>
+        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
         <code class="button" on:click={triggerClick}>Copy this text</code>
     </Tooltip>
 
@@ -129,7 +131,18 @@ const fruits = [
     <Modal bind:this={modal} let:closeModal>
         <h1 style="margin:0;">Modal</h1>
         <p>Content</p>
+        <button on:click={() => nested_modal.show()}>Open Nested Modal</button>
+
+        <Modal bind:this={nested_modal}>
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+        </Modal>
+
         <Select searchable items={fruits}></Select>
+
         <button on:click={closeModal}>Close</button>
     </Modal>
 

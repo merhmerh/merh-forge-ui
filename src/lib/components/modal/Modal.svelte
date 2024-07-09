@@ -54,6 +54,11 @@ function handle_keydown(e) {
     if (!escape) {
         return;
     }
+
+    if (modal.querySelector(".modal_background.forge-modal")) {
+        return;
+    }
+
     if (e.key === "Escape") {
         if (exitWithEscapeKey) {
             return close();
@@ -108,11 +113,11 @@ export function close() {
 }
 </script>
 
-<svelte:window on:keydown={handle_keydown} />
+<svelte:window />
 {#if showModal}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div aria-modal="true" class="modal_background" on:click|self={clickOutside} bind:this={modal}>
+    <div aria-modal="true" class="modal_background forge-modal" on:click|self={clickOutside} bind:this={modal} on:keydown={handle_keydown}>
         <div class="modal" modal_position={modalPosition} class:noStyle={!modalStyle} role="dialog" aria-modal="true">
             <div class:slot={modalStyle}>
                 <slot {closeFromChild} {closeModal} />
