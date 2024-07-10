@@ -51,18 +51,8 @@ async function focusFirstElement() {
 function handle_keydown(e) {
     if (!modal) return;
 
-    if (!escape) {
-        return;
-    }
-
     if (modal.querySelector(".modal_background.forge-modal")) {
         return;
-    }
-
-    if (e.key === "Escape") {
-        if (exitWithEscapeKey) {
-            return close();
-        }
     }
 
     if (e.key === "Tab") {
@@ -104,6 +94,22 @@ export function open() {
     focusFirstElement();
 }
 
+function handle_window_keydown(e) {
+    if (!modal) return;
+
+    if (!escape) return;
+
+    if (modal.querySelector(".modal_background.forge-modal")) {
+        return;
+    }
+
+    if (e.key === "Escape") {
+        if (exitWithEscapeKey) {
+            return close();
+        }
+    }
+}
+
 export function close() {
     showModal = false;
     document.body.style.overflowY = "auto";
@@ -113,7 +119,7 @@ export function close() {
 }
 </script>
 
-<svelte:window />
+<svelte:window on:keydown={handle_window_keydown} />
 {#if showModal}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
