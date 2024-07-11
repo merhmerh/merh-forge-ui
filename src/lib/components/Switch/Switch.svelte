@@ -1,5 +1,5 @@
 <script>
-export let isChecked = false;
+export let isChecked = null;
 export let checked = false;
 import Icon from "@iconify/svelte";
 import { createEventDispatcher, onMount } from "svelte";
@@ -12,8 +12,8 @@ function toggleCheck() {
 }
 
 onMount(() => {
-    checked = isChecked;
     if (isChecked) {
+        checked = isChecked;
         console.log("To be deprecated, use checked instead of isChecked.");
     }
 });
