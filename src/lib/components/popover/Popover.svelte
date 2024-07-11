@@ -121,6 +121,7 @@ function closePopover() {
             bind:this={popup}
             class="popup"
             class:auto={position == "auto"}
+            class:anchor={position != "auto"}
             class:bottom-left={position == "bottom-left"}
             class:bottom-right={position == "bottom-right"}
             class:bottom-center={position == "bottom-center"}
@@ -146,6 +147,9 @@ function closePopover() {
 }
 .button {
     padding: 0 !important;
+}
+.popover {
+    width: fit-content;
 }
 .popup {
     z-index: 1001;

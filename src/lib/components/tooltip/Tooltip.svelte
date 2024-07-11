@@ -7,7 +7,7 @@ export let value;
 export let position = "center";
 export let fixed = false;
 export let display = "inline-block";
-export let width = "100%";
+export let width = "fit-content";
 let tooltipValue = value;
 
 const dispatch = createEventDispatcher();
@@ -53,7 +53,7 @@ function onClick() {
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
 <div
     bind:this={container}
-    class="container"
+    class="tooltip-container"
     style="--tooltip__container-display:{display}; --tooltip__container-width:{width}"
     on:mouseleave={() => {
         showToolTip = false;
@@ -87,11 +87,11 @@ function onClick() {
 </div>
 
 <style lang="scss">
-.container {
+.tooltip-container {
     display: var(--tooltip__container-display);
     position: relative;
     height: fit-content;
-    width: var(--tooltip__width);
+    width: var(--tooltip__container-width);
 }
 
 .tooltip__popup {
@@ -110,6 +110,9 @@ function onClick() {
     background-color: var(--mono-200);
     span {
         display: flex;
+        text-align: center;
+        width: var(--tooltip__width);
+        white-space: var(--wrap, nowrap);
     }
 
     .overlay {

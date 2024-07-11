@@ -1,7 +1,7 @@
 <script>
 import { createEventDispatcher } from "svelte";
 
-export let reverse;
+export let reverse = false;
 export let confirmText = "Save";
 export let cancelText = "Cancel";
 let confirmButton, cancelButton;
@@ -18,7 +18,7 @@ function cancel() {
 
 <div class="formControls" class:reverse>
     <button bind:this={confirmButton} class="" on:click={confirm}>{confirmText}</button>
-    <button bind:this={cancelButton} class="secondary" on:click={cancel}>{cancelText}</button>
+    <button bind:this={cancelButton} class="secondary outlined" on:click={cancel}>{cancelText}</button>
 </div>
 
 <style lang="scss">
