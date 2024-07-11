@@ -11,7 +11,7 @@ function toggleCheck() {
 }
 </script>
 
-<div class="container">
+<div class="switch-container">
     <button on:click={toggleCheck} class:checked={isChecked}>
         <div class="ball">
             {#if !isChecked}
@@ -25,7 +25,7 @@ function toggleCheck() {
 </div>
 
 <style lang="scss">
-.container {
+.switch-container {
     display: flex;
     align-items: center;
     gap: 0.5rem;
