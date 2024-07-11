@@ -1,20 +1,28 @@
 <script>
 export let isChecked = false;
+export let checked = false;
 import Icon from "@iconify/svelte";
-import { createEventDispatcher } from "svelte";
+import { createEventDispatcher, onMount } from "svelte";
 
 const dispatch = createEventDispatcher();
 
 function toggleCheck() {
-    isChecked = !isChecked;
-    dispatch("change", isChecked);
+    checked = !checked;
+    dispatch("change", checked);
 }
+
+onMount(() => {
+    checked = isChecked;
+    if (isChecked) {
+        console.log("To be deprecated, use checked instead of isChecked.");
+    }
+});
 </script>
 
 <div class="switch-container">
-    <button on:click={toggleCheck} class:checked={isChecked}>
+    <button on:click={toggleCheck} class:checked>
         <div class="ball">
-            {#if !isChecked}
+            {#if !checked}
                 <Icon icon="mingcute:close-fill" width="12" />
             {:else}
                 <Icon icon="mingcute:check-fill" width="12" />

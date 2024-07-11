@@ -16,7 +16,7 @@ function toggleCheck() {
 }
 </script>
 
-<button class="container" class:disabled on:click={toggleCheck} style="--height:{height}px">
+<button class="checkbox-container" class:disabled on:click={toggleCheck} style="--height:{height}px">
     <div class="checkbox">
         {#if checked}
             {#if filled}
@@ -36,7 +36,7 @@ function toggleCheck() {
 </button>
 
 <style lang="scss">
-button.container {
+.checkbox-container {
     display: flex;
     align-items: center;
     justify-content: center;
