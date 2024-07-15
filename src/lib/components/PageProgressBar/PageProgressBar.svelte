@@ -30,7 +30,7 @@ $: if ($navigating) {
         width: 00%;
         transition: width 2s ease-out;
         height: 100%;
-        background-color: var(--accent);
+        background-color: var(--accent, #808080);
         animation: loading 2s forwards ease-out;
 
         @keyframes loading {
