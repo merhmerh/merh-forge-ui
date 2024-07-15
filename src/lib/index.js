@@ -8,6 +8,7 @@ export { default as Notify } from "./components/Notify/Notify.svelte";
 export { default as Switch } from "./components/Switch/Switch.svelte";
 export { default as Checkbox } from "./components/Checkbox/Checkbox.svelte";
 export { default as FormControls } from "./components/FormControls/FormControls.svelte";
+export { default as PageProgressBar } from "./components/PageProgressBar/PageProgressBar.svelte";
 
 export { default as Waterfall } from "./components/Waterfall/Waterfall.svelte";
 export { default as WaterfallSingle } from "./components/Waterfall/WaterfallSingle.svelte";
