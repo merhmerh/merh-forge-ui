@@ -80,7 +80,7 @@ function onClick() {
             class:bottom={position == "bottom"}
             transition:fade={{ duration: 150 }}
             on:click={onClick}>
-            <span>{tooltipValue}</span>
+            <span>{@html tooltipValue}</span>
             <div bind:this={overlay} class="overlay"></div>
         </div>
     {/if}
