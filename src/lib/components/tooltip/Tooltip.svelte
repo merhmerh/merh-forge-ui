@@ -109,12 +109,13 @@ function onClick() {
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     font-size: 0.875rem;
-    border: 1px solid var(--tooltip-border, --mono-300);
-    background-color: var(--tooltip-bg, --mono-200);
+    border: 1px solid var(--tooltip-border, var(--mono-300));
+    background-color: var(--tooltip-bg, var(--mono-200));
     span {
         display: flex;
         text-align: center;
-        width: var(--tooltip__width, var(--tooltip-popup-width));
+        justify-content: center;
+        width: var(--tooltip-popup-width, var(--tooltip__width));
         white-space: var(--wrap, nowrap);
     }
 
@@ -136,9 +137,9 @@ function onClick() {
             width: 8px;
             height: 8px;
             bottom: -5px;
-            background-color: var(--tooltip-bg, --mono-200);
-            border-bottom: 1px solid var(--tooltip-border, --mono-300);
-            border-right: 1px solid var(--tooltip-border, --mono-300);
+            background-color: var(--tooltip-bg, var(--mono-200));
+            border-bottom: 1px solid var(--tooltip-border, var(--mono-300));
+            border-right: 1px solid var(--tooltip-border, var(--mono-300));
         }
     }
 
@@ -155,8 +156,8 @@ function onClick() {
             &:after {
                 top: -5px;
                 border: none;
-                border-top: 1px solid var(--tooltip-border, --mono-300);
-                border-left: 1px solid var(--tooltip-border, --mono-300);
+                border-top: 1px solid var(--tooltip-border, var(--mono-300));
+                border-left: 1px solid var(--tooltip-border, var(--mono-300));
             }
         }
         .overlay {
