@@ -114,7 +114,7 @@ function onClick() {
     span {
         display: flex;
         text-align: center;
-        width: var(--tooltip__width);
+        width: var(--tooltip__width, var(--tooltip-popup-width));
         white-space: var(--wrap, nowrap);
     }
 
@@ -167,7 +167,7 @@ function onClick() {
         position: fixed;
         top: var(--tooltip__top);
         left: var(--tooltip__left);
-        width: var(--tooltip__width);
+        width: var(--tooltip__width, var(--tooltip-popup-width));
         span {
             white-space: normal;
         }
