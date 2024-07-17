@@ -74,6 +74,7 @@ function onClick() {
             class="tooltip__popup"
             class:fixed
             class:arrow={position !== "center"}
+            class:clickable={clickedValue}
             style="--tooltip__left: {tooltipTopLeft}; --tooltip__top: {tooltipTopOffset};
                 --tooltip__width: {width}"
             class:top={position == "top"}
@@ -95,7 +96,9 @@ function onClick() {
 }
 
 .tooltip__popup {
-    cursor: pointer;
+    &.clickable {
+        cursor: pointer;
+    }
     display: flex;
     position: absolute;
     top: 50%;
